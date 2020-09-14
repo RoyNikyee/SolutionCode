@@ -5,20 +5,61 @@ import sun.reflect.generics.tree.Tree;
 import java.util.*;
 
 public class Solution {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
 
         List<List<Integer>> ret = generate(5);
         System.out.println(ret);
 
     }
+
+    //219
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        //前n - k
+        k = Math.min(k, nums.length);
+        for (int i = 0; i < nums.length - k; i++) {
+            for (int n = 1; n <= k; n++) {
+                if (nums[i] == nums[i + n]) {
+                    return true;
+                }
+            }
+        }
+        //最后k个元素
+        if (k >= 2) {
+            for (int j = nums.length - k; j < nums.length - 1; j++) {
+                for (int m = j + 1; m < nums.length; m++) {
+                    if (nums[j] == nums[m]) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    //217
+    public boolean containsDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] == nums[i + 1]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //169
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
+
     //167
     public int[] twoSum(int[] numbers, int target) {
-        for(int i = 0; i < numbers.length; i++)
-        {
-            for(int j = )
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j =)
         }
     }
+
     //119杨辉三角II
     public List<Integer> getRow(int rowIndex) {
         List<List<Integer>> res = new LinkedList<>();
