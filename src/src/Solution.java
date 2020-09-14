@@ -53,18 +53,17 @@ public class Solution {
         return nums[nums.length / 2];
     }
 
-    //167
-    public int[] twoSum(int[] numbers, int target) {
-        for (int i = 0; i < numbers.length; i++) {
-            for (int j =)
-        }
-    }
+//    //167
+//    public int[] twoSum(int[] numbers, int target) {
+//        for (int i = 0; i < numbers.length; i++) {
+//            for (int j =)
+//        }
+//    }
 
     //119杨辉三角II
     public List<Integer> getRow(int rowIndex) {
         List<List<Integer>> res = new LinkedList<>();
-        if(rowIndex == 0)
-        {
+        if (rowIndex == 0) {
             return null;
         }
         //先创建第一行
