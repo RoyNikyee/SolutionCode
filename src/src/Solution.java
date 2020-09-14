@@ -53,6 +53,62 @@ public class Solution {
         return nums[nums.length / 2];
     }
 
+    //167
+    public int[] twoSum(int[] numbers, int target) {
+        int[] res = new int[2];
+        for (int i = 0; i < numbers.length; i++) {
+            res[0] = i;
+            for (int j = i; j < numbers.length; j++) {
+                if (numbers[i] + numbers[j] == target) {
+                    res[1] = j;
+                }
+            }
+        }
+        res[0]++;
+        res[1]++;
+        return res;
+    }
+
+    //122 买卖股票II
+    public int maxProfit(int[] prices) {
+        int profit = 0;
+        int i = 0;
+        while (i < prices.length - 1) {
+            //寻找买入时机
+            while (i < prices.length - 1 && prices[i + 1] < prices[i]) {
+                i++;
+            }
+            int low = prices[i];
+            //寻找卖出时机
+            while (i < prices.length - 1 && prices[i + 1] >= prices[i]) {
+                i++;
+            }
+            int high = prices[i];
+            profit += high - low;
+        }
+        return profit;
+    }
+
+
+    //121 买卖股票I
+    public int maxProfit1(int[] prices) {
+        int minBeforeCurr = Integer.MAX_VALUE;
+        int[] profits = new int[prices.length];
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minBeforeCurr) {
+                minBeforeCurr = prices[i];
+            }
+            profits[i] = prices[i] - minBeforeCurr;
+        }
+        int maxProfit = 0;
+        for (int profit : profits) {
+            if (profit > maxProfit) {
+                maxProfit = profit;
+            }
+        }
+        return maxProfit;
+    }
+
 //    //167
 //    public int[] twoSum(int[] numbers, int target) {
 //        for (int i = 0; i < numbers.length; i++) {
