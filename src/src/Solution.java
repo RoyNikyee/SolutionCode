@@ -12,6 +12,52 @@ public class Solution {
 
     }
 
+    //414
+    public int thirdMax(int[] nums) {
+        long max = Long.MIN_VALUE;
+        long mid = max;
+        long third = max;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > max) {
+                third = mid;
+                mid = max;
+                max = nums[i];
+            } else if (nums[i] > mid && nums[i] < max) {
+                third = mid;
+                mid = nums[i];
+            } else if (nums[i] > third && nums[i] < mid) {
+                third = nums[i];
+            }
+        }
+        if (third != Long.MIN_VALUE) {
+            return new Long(third).intValue();
+        }
+        return new Long(max).intValue();
+    }
+
+    //283
+    public void moveZeroes(int[] nums) {
+        int lastNonZeroIndex = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[lastNonZeroIndex] = nums[i];
+                lastNonZeroIndex++;
+            }
+        }
+        for (int j = lastNonZeroIndex; j < nums.length; j++) {
+            nums[j] = 0;
+        }
+    }
+
+    //268
+    public int missingNumber(int[] nums) {
+        int res = nums.length;
+        for (int i = 0; i < nums.length; i++) {
+            res = res ^ (i ^ nums[i]);
+        }
+        return res;
+    }
+
     //219
     public boolean containsNearbyDuplicate(int[] nums, int k) {
         //前n - k
