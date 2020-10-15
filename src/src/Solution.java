@@ -12,6 +12,41 @@ public class Solution {
 
     }
 
+    //724
+    public int pivotIndex(int[] nums) {
+        //极其特殊的情况
+        if (nums.length == 0)
+            return -1;
+        //初始位置的左右两侧和
+        int leftSum = 0;
+        int rightSum = 0;
+        int index = 0;
+        for (int i = 1; i < nums.length; i++) {
+            rightSum += nums[i];
+        }
+        //左加右减，直至相等或者最后一个数
+        while (leftSum != rightSum && index < nums.length - 1) {
+            index++;
+            leftSum += nums[index - 1];
+            rightSum -= nums[index];
+        }
+        //判断停止的位置是否正确
+        return leftSum == rightSum ? index : -1;
+    }
+
+    //717
+    public boolean isOneBitCharacter(int[] bits) {
+        //不管最后一位是0还是1，只要前length - 1位可以组成唯一的字符串就可以。
+        int stop = 0;
+        while (stop < bits.length - 1) {
+            if (bits[stop] == 1)
+                stop += 2;
+            else
+                stop++;
+        }
+        return stop == bits.length - 1;
+    }
+
     //697
     public int findShortestSubArray(int[] nums) {
         HashMap<Integer, Integer> count = new HashMap<>();
