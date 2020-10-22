@@ -13,6 +13,60 @@ public class Solution {
 
     }
 
+    //03
+    public int lengthOfLongestSubstring(String s) {
+        if (s == null) {
+            return 0;
+        }
+        int right = -1;//将right设置为哪个index之后就好了。-1之后，指向的是0
+        int ans = 0;
+        Set<Character> occur = new HashSet<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (i > 0) {
+                occur.remove(s.charAt(i - 1));
+            }
+            while (right + 1 < s.length() && !occur.contains(s.charAt(right + 1))) {
+                occur.add(s.charAt(right + 1));
+                right++;
+            }
+            ans = Math.max(ans, right - i + 1);
+        }
+        return ans;
+    }
+
+    //面试题02.01
+    public ListNode removeDuplicateNodes(ListNode head) {
+        Set<Integer> valueSet = new HashSet<>();
+        ListNode curr = head;
+        ListNode prev = new ListNode(-1);//前驱节点
+        prev.next = curr;
+        //末尾元素之前的元素，保存值和去重
+        while (curr != null) {
+            if (!valueSet.contains(curr.val)) {
+                valueSet.add(curr.val);
+                prev = prev.next;
+            } else {
+                prev.next = curr.next;
+            }
+            curr = curr.next;
+        }
+        return head;
+    }
+
+    //剑指offer22
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        ListNode fast = head;
+        ListNode slow = head;
+        for (int i = 0; i < k; i++) {
+            fast = fast.next;
+        }
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
     //剑指offer18
     public ListNode deleteNode(ListNode head, int val) {
         ListNode curr = head;
