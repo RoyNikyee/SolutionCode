@@ -39,10 +39,6 @@ public class October {
             default: return 0;
         }
     }
-    //14
-    public String longestCommonPrefix(String[] strs) {
-
-    }
     //09
     public boolean isPalindrome(int x) {
         //先处理特殊情况（一定不是回文数）：1.负数 2.0结尾的数（0除外）
