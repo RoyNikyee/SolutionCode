@@ -9,10 +9,94 @@ public class Solution {
     public static void main(String[] args) {
 
         List<List<Integer>> ret = September.generate(5);
-        System.out.println(ret);
+        System.out.println(isPalindrome("    Aa  "));
 
     }
 
+    //1103
+    public int[] distributeCandies(int candies, int num_people) {
+        int currCandySum = 0;
+        int currIndex = 0;
+        int[] res = new int[num_people];
+        while(currCandySum < candies)
+        {
+            currIndex ++;
+            if(candies - currCandySum > currIndex)
+            {
+                res[(currIndex - 1)% num_people] += currIndex;
+            }
+            else
+            {
+                res[(currIndex - 1)% num_people] += candies - currCandySum;
+            }
+            currCandySum += currIndex;
+        }
+        return res;
+    }
+    //198
+    public int rob(int[] nums) {
+        //特殊情况
+        if(nums.length == 0)
+            return 0;
+        if(nums.length == 1)
+            return nums[0];
+        //从nums[1]开始，记录当前的两种选择
+        int robk2 = nums[0];
+        int robk1 = Math.max(nums[0],nums[1]);
+        for(int i = 2; i < nums.length; i++)
+        {
+            int temp = Math.max(robk2 + nums[i],robk1);
+            robk2 = robk1;
+            robk1 = temp;
+        }
+        return robk1;
+    }
+    //136
+    public int singleNumber(int[] nums) {
+        int ret = 0;
+        for(int num : nums)
+        {
+            ret = ret ^ num;
+        }
+        return ret;
+    }
+    //125
+    static public boolean isPalindrome(String s) {
+        int left = 0;
+        int right = s.length() - 1;
+        while(left < right)
+        {
+            while(left < right && !Character.isLetterOrDigit(s.charAt(left)))
+                left ++;
+            while(left < right && !Character.isLetterOrDigit(s.charAt(right)))
+                right --;
+            if(left < right)
+            {
+                if(Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right)))
+                    return false;
+                left ++;
+                right --;
+            }
+        }
+        return true;
+    }
+    //70
+    public int climbStairs(int n) {
+        if(n == 1)
+            return 1;
+        if(n == 2)
+            return 2;
+        int n1 = 2;
+        int n2 = 1;
+        int ret = 0;
+        for(int i = 3; i <= n; i++)
+        {
+            ret = n1 + n2;
+            n2 = n1;
+            n1 = ret;
+        }
+        return ret;
+    }
     //67
     public String addBinary(String a, String b) {
         int m = a.length();
